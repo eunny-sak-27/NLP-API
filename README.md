@@ -12,7 +12,6 @@ This project implements an end-to-end **NLP microservice** using **FastAPI** tha
 The system exposes a **RESTful API** that accepts a JSON input containing a text snippet and returns:
 - The predicted **classification labels** (e.g., `Objection`, `Pricing Discussion`, `Security`, `Competition`)
 - Extracted **domain-specific entities** using both techniques
-- *(Optional)* A summarized version of the input text
 
 All components are **containerized using Docker**, enabling seamless deployment to cloud platforms like **Render** or local execution.
 
@@ -148,4 +147,6 @@ This FastAPI project is deployed live using [Render](https://render.com) with co
 8. Once deployed, test with:
    ```bash
    curl -X POST https://nlp-service-wuq5.onrender.com/predict -H "Content-Type: application/json" -d "{\"text\": \"Can you explain your pricing model and refund policy for enterprise customers?\"}"
-```
+   ```
+   RESULT
+![image](https://github.com/user-attachments/assets/a56ce317-df11-4a47-8833-531b89a64e13)
