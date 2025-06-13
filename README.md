@@ -15,13 +15,123 @@ This project implements a **FastAPI** application that serves a **machine learni
 
 ---
 
-## 🗃️ Project Structure
+##  Project Structure
 
-├── app.py # FastAPI app
-├── model.pkl # Trained ML model
-├── vectorizer.pkl # Trained TF-IDF vectorizer
-├── mlb.pkl # MultiLabelBinarizer instance
-├── entity_extraction.py # Custom entity extraction function
-├── dt1.xlsx # Original dataset
-├── requirements.txt # Python dependencies
-└── README.md
+- `app.py` – FastAPI application
+- `model.pkl` – Trained machine learning model (Logistic Regression)
+- `vectorizer.pkl` – Trained TF-IDF vectorizer
+- `mlb.pkl` – MultiLabelBinarizer instance used for multi-label binarization
+- `entity_extraction.py` – Custom entity extraction function (`extract_combined_entities`)
+- `dt1.xlsx` – Original labeled dataset used for training
+- `requirements.txt` – Python dependencies
+- `README.md` – Project documentation
+
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1.  Create and activate a virtual environment
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+---
+
+### 3. 🧠 Ensure these files exist in the directory
+
+- `model.pkl`
+- `vectorizer.pkl`
+- `mlb.pkl` 
+- `entity_extraction.py: must contain a function extract_combined_entities(text: str) -> dict`
+
+---
+
+### 4. 🧠 Run the FastAPI app
+```bash
+uvicorn app:app --reload
+```
+By default, it will run on: http://localhost:8000
+
+---
+### 4. 📮 API Endpoints
+🔍 POST /predict
+Description: Classifies a piece of text and extracts entities.
+Request Body:
+```bash
+{
+  "text": "What are your pricing and security policies?"
+}
+```
+Response:
+```bash
+{
+  "text": "What are your pricing and security policies?",
+  "predicted_labels": ["Pricing", "Security"],
+  "extracted_entities": {
+    "ORG": ["YourCompany"],
+    "POLICY": ["pricing policy", "security policy"]
+  }
+}
+```
+---
+
+### 🏠 GET /
+Simple health check route.
+
+Response:
+```bash
+{
+  "message": "FastAPI NLP Model with Classification & Entity Extraction"
+}
+```
+## 🔧 How It Works
+
+1. Input text is received via a `POST` request to `/predict`
+2. The text is transformed using a trained `TfidfVectorizer`
+3. The machine learning model (`MultiOutputClassifier`) predicts multiple labels
+4. Predicted labels are decoded using `MultiLabelBinarizer`
+5. Custom entity extraction is performed using `extract_combined_entities`
+6. The final result is returned as a structured JSON object
+
+---
+
+### 🧪 Testing the API (Swagger UI)
+Visit: http://localhost:8000/docs
+
+Swagger UI is automatically available with FastAPI for testing all endpoints.
+
+---
+
+## 🚀 Deployment on Render
+
+This FastAPI project is deployed live using [Render](https://render.com) with containerized deployment.
+
+### 🧱 Deployment Steps
+
+### 🛠️ Hosting on Render (Step-by-Step)
+
+1. Push your project to a GitHub repository
+2. Go to [https://render.com](https://render.com) and log in
+3. Click **"New → Web Service"**
+4. Connect your GitHub repo
+5. Fill in the details:
+   - **Environment**: Python 3
+   - **Build Command**:  
+     ```bash
+     pip install -r requirements.txt
+     ```
+   - **Start Command**:  
+     ```bash
+     uvicorn app:app --host 0.0.0.0 --port 10000
+     ```
+   - **Port**: 10000 (or leave as default if unspecified)
+6. Click **Create Web Service**
+7. Wait for Render to build and deploy your app
+8. Once deployed, test with:
+   ```bash
+   curl -X POST https://your-app-name.onrender.com/predict \
+   -H "Content-Type: application/json" \
+   -d '{"text": "Tell me about pricing"}'
