@@ -1,6 +1,21 @@
 #  NLP API with FastAPI – Multi-label Classification & Entity Extraction
 
-This project implements a **FastAPI** application that serves a **machine learning model** trained to perform **multi-label text classification** along with **entity extraction** using spaCy.
+## 📌 Project Description
+
+This project implements an end-to-end **NLP microservice** using **FastAPI** that performs:
+
+1. **Multi-label text classification** on sales/marketing call snippets using a trained Logistic Regression model.  
+2. **Domain-specific entity extraction** using a hybrid approach:  
+   - A **custom dictionary lookup** from `domain_knowledge.json` (e.g., competitors, pricing terms, product features).  
+   - A **spaCy-based Named Entity Recognition (NER)** pipeline for general-purpose extraction.
+
+The system exposes a **RESTful API** that accepts a JSON input containing a text snippet and returns:
+- The predicted **classification labels** (e.g., `Objection`, `Pricing Discussion`, `Security`, `Competition`)
+- Extracted **domain-specific entities** using both techniques
+- *(Optional)* A summarized version of the input text
+
+All components are **containerized using Docker**, enabling seamless deployment to cloud platforms like **Render** or local execution.
+
 
 ---
 
@@ -40,7 +55,7 @@ pip install -r requirements.txt
 ```
 ---
 
-### 3. 🧠 Ensure these files exist in the directory
+### 3. Ensure these files exist in the directory
 
 - `model.pkl`
 - `vectorizer.pkl`
@@ -49,7 +64,7 @@ pip install -r requirements.txt
 
 ---
 
-### 4. 🧠 Run the FastAPI app
+### 4. Run the FastAPI app
 ```bash
 uvicorn app:app --reload
 ```
@@ -132,6 +147,5 @@ This FastAPI project is deployed live using [Render](https://render.com) with co
 7. Wait for Render to build and deploy your app
 8. Once deployed, test with:
    ```bash
-   curl -X POST https://your-app-name.onrender.com/predict \
-   -H "Content-Type: application/json" \
-   -d '{"text": "Tell me about pricing"}'
+   curl -X POST https://nlp-service-wuq5.onrender.com/predict -H "Content-Type: application/json" -d "{\"text\": \"Can you explain your pricing model and refund policy for enterprise customers?\"}"
+```
