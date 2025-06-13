@@ -17,3 +17,11 @@ This project implements a **FastAPI** application that serves a **machine learni
 
 ## 🗃️ Project Structure
 
+├── app.py # FastAPI app
+├── model.pkl # Trained ML model
+├── vectorizer.pkl # Trained TF-IDF vectorizer
+├── mlb.pkl # MultiLabelBinarizer instance
+├── entity_extraction.py # Custom entity extraction function
+├── dt1.xlsx # Original dataset
+├── requirements.txt # Python dependencies
+└── README.md
