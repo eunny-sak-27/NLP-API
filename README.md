@@ -70,8 +70,8 @@ uvicorn app:app --reload
 By default, it will run on: http://localhost:8000
 
 ---
-### 4. 📮 API Endpoints
-🔍 POST /predict
+### 4. API Endpoints
+POST /predict
 Description: Classifies a piece of text and extracts entities.
 Request Body:
 ```bash
@@ -92,7 +92,7 @@ Response:
 ```
 ---
 
-### 🏠 GET /
+### GET /
 Simple health check route.
 
 Response:
@@ -112,7 +112,7 @@ Response:
 
 ---
 
-### 🧪 Testing the API (Swagger UI)
+### Testing the API (Swagger UI)
 Visit: http://localhost:8000/docs
 
 Swagger UI is automatically available with FastAPI for testing all endpoints.
@@ -123,9 +123,9 @@ Swagger UI is automatically available with FastAPI for testing all endpoints.
 
 This FastAPI project is deployed live using [Render](https://render.com) with containerized deployment.
 
-### 🧱 Deployment Steps
+### Deployment Steps
 
-### 🛠️ Hosting on Render (Step-by-Step)
+### Hosting on Render (Step-by-Step)
 
 1. Push your project to a GitHub repository
 2. Go to [https://render.com](https://render.com) and log in
