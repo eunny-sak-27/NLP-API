@@ -152,5 +152,8 @@ This FastAPI project is deployed live using [Render](https://render.com) with co
 ![image](https://github.com/user-attachments/assets/a56ce317-df11-4a47-8833-531b89a64e13)
 
 ---
-###    Built By:
-**Saketh Eunny**
+###  Built By:
+- Saketh Eunny
+- Mail: saketheunny1@gmail.com
+- [LinkedIn](https://www.linkedin.com/in/saketh-eunny-a7b9b2231)
+
